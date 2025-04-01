@@ -1,27 +1,39 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import urlRoute from './routes/urlRoute.js'
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import urlRoute from './routes/urlRoute.js';
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+// Middleware
+app.use(express.json());
+
+// Allow requests from your frontend (update URL when deploying frontend to Vercel)
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://snap-url-an-url-shortener.vercel.app/',  // Replace this with your frontend URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true 
+    credentials: true
 }));
 
-app.use('/api/url', urlRoute)
+// Define Routes
+app.use('/api/url', urlRoute);
 
+// Fallback route (optional but recommended)
+app.get('/', (req, res) => {
+    res.send('Backend is working!');
+});
+
+// Database connection
 mongoose
     .connect(process.env.DATABASE)
-    .then(()=> console.log("Database Connected Successfully"))
-    .catch((error) => console.log("MongoDB Connection error:", error))
+    .then(() => console.log("Database Connected Successfully"))
+    .catch((error) => console.log("MongoDB Connection error:", error));
 
-const PORT = process.env.PORT
-app.listen(PORT, ()=> console.log(`Server started on Port: ${PORT}`))
+// Export the app for Vercel deployment (Serverless environment)
+export default app;
+
+// Vercel automatically handles the listening part when deploying a serverless function
