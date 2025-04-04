@@ -19,6 +19,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.options('/api/url/shorten', cors());
+
 // Define Routes
 app.use('/api/url', urlRoute);
 
