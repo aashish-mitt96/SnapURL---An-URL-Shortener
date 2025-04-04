@@ -13,7 +13,7 @@ function Snapbox() {
   const generateShortUrl = async () => {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api/url/shorten`,  // Use environment variable for API URL
+        `${API_BASE_URL}api/url/shorten`,  // Use environment variable for API URL
         { originalUrl: originalUrl },
         {
           headers: {
@@ -32,7 +32,7 @@ function Snapbox() {
   const fetchAnalytics = async () => {
     try {
       const response = await axios.get(
-        `${API_BASE_URL}/api/url/analytics/${shortUrl}`,  // Use environment variable for API URL
+        `${API_BASE_URL}api/url/analytics/${shortUrl}`,  // Use environment variable for API URL
         {
           headers: {
             Authorization: localStorage.getItem("token"),
