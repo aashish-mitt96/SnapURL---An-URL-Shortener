@@ -13,9 +13,9 @@ app.use(express.json());
 
 // Allow requests from your frontend (update URL when deploying frontend to Vercel)
 app.use(cors({
-    origin: 'https://snap-url-an-url-shortener.vercel.app/',  // Replace this with your frontend URL
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: 'https://snap-url-an-url-shortener-7m59.vercel.app/',  // Replace this with your frontend URL
+    methods: ['GET', 'POST' , 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
     credentials: true
 }));
 
